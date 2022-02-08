@@ -18,10 +18,11 @@ namespace DataProcessor
             Console.WriteLine($"Begin process of { InputFilePath}");
 
             // Check if file exists
-            //if (!File.Exists())
-            //{
-
-            //}
+            if (!File.Exists(InputFilePath))
+            {
+                Console.WriteLine($"ERROR: file {InputFilePath} does not exist.");
+                return;
+            }
         }
     }
 }
