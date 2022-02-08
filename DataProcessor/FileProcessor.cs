@@ -9,6 +9,10 @@ namespace DataProcessor
 {
     class FileProcessor
     {
+        private const string BackupDirectoryName = "backup";
+        private const string InProgressDirectoryName = "processing";
+        private const string CompletedDirectoryName = "complete";
+
         public string InputFilePath { get; }
 
         public FileProcessor(string filePath) => InputFilePath = filePath;
@@ -26,6 +30,16 @@ namespace DataProcessor
 
             string rootDirectoryPath = new DirectoryInfo(InputFilePath).Parent.Parent.FullName;
             Console.WriteLine($"Root data path is {rootDirectoryPath}");
+
+            // Check if backup dir exists
+            //string backupDirectoryPath = rootDirectoryPath + "/" + BackupDirectoryName;
+            string backupDirectoryPath = Path.Combine(rootDirectoryPath, BackupDirectoryName); //Better way with Class Path
+             
+            if (!Directory.Exists(backupDirectoryPath))
+            {
+                Console.WriteLine($"Attempting to create {backupDirectoryPath}");
+                Directory.CreateDirectory(backupDirectoryPath);
+            }
         }
     }
 }
